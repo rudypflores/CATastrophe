@@ -28,7 +28,7 @@ export default async function extractFramesFromVideo(videoUrl, fps=25) {
       canvas.height = h;
   
       let frames = [];
-      let interval = 1 / fps;
+      let interval = 10 / fps;
       let currentTime = 0;
   
       while(currentTime < duration) {

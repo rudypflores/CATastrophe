@@ -7,21 +7,28 @@ const App = () => {
   const [video, setVideo] = useState('');
 
   const extract = async (event) => {
-    setVideo(video+event.target.value);
+    setVideo(event.target.value);
   }
 
   const handleSubmit = async(event) => {
     event.preventDefault();
     const cors = 'https://cors-anywhere.herokuapp.com/';
 
+    //
     let frames = await extractFramesFromVideo(`${cors}${video}`);
+    let i = 0;
 
-    for(let i of frames) {
-      setTimeout(() => {
-        let img = document.getElementById('temp');
-        img.src = i;
-      }, 3000);
-    }
+    //traverse all images in array and display them
+    let timer = setInterval(() => {
+      let img = document.getElementById('temp');
+      img.src = frames[i];
+      
+      //next image
+      i++;
+
+      if(i >= frames.length)
+        clearInterval(timer);
+    }, 300);
   }
 
   return (
